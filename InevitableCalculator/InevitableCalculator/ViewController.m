@@ -25,6 +25,7 @@ int equals=0;
 int code;
 double multE;
 double multY;
+double global;
 
 - (IBAction)oneButtonPressed:(id)sender {
     if(checkClear) {
@@ -146,10 +147,23 @@ double multY;
     multY=[_display.text doubleValue];
 }
 
+- (IBAction)decimalButtonPressed:(id)sender {
+    if(checkClear) {
+        _display.text=@".";
+        current=0;
+        checkClear=false;
+    } else {
+        _display.text = [_display.text stringByAppendingString:(@".")];
+        current=[_display.text doubleValue];
+    }
+    multY=[_display.text doubleValue];
+}
+
+
 
 - (IBAction)plusButtonPressed:(id)sender {
+    if ([_display.text doubleValue]!=global) {
     code=0;
-    
     if (stream && plus>=1) {
         current=[_display.text doubleValue];
         _display.text = [NSString stringWithFormat: @"%f",current+prev];
@@ -160,11 +174,12 @@ double multY;
     } else {
         checkClear=false;
         _display.text=@" ";
-        
         prev=current;
         stream=true;
         plus++;
         NSLog(@"%f (and) %f",current, prev);
+    }
+    global=[_display.text doubleValue];
     }
 }
 
