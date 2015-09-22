@@ -18,36 +18,37 @@
 
 int current=0;
 int prev=0;
-int c=10;
+BOOL checkClear;
 
 - (IBAction)oneButtonPressed:(id)sender {
+    if(checkClear) {
+        NSLog(@"got here");
+        _display.text=@"1";
+        checkClear=false;
+    } else {
     _display.text = [_display.text stringByAppendingString:(@"1")];
     current=[_display.text intValue];
-    //NSLog(@"%d",current);
+    }
 }
 
 - (IBAction)plusButtonPressed:(id)sender {
+    checkClear=false;
     _display.text=@" ";
-    int temp=current+prev;
-    NSLog(@"%d",temp);
-    //_display.text= (@"%d",temp);
+    NSLog(@"%i",current+prev);
     prev=current;
-    
 }
 
 - (IBAction)equalsButtonPressed:(id)sender {
-    
-    int temp=current+prev;
-    NSLog(@"%d",temp);
-    _display.text = [NSString stringWithFormat: @"%d",temp];
-    //NSLog(@"equals");
+    NSLog(@"%i",current+prev);
+    _display.text = [NSString stringWithFormat: @"%i",current+prev];
+    checkClear=true;
 }
 
 - (IBAction)clearButtonPressed:(id)sender {
+    
     current=0;
     prev=0;
     _display.text=@" ";
-    NSLog(@"clear");
 }
 
 - (void)viewDidLoad {
