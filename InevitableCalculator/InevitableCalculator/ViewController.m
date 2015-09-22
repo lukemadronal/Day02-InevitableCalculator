@@ -10,14 +10,45 @@
 
 @interface ViewController ()
 
-@property (nonatomic,weak) IBOutlet UIButton *oneButton;
-@property (nonatomic,weak) IBOutlet UIButton *clearButton;
-@property (nonatomic,weak) IBOutlet UIButton *equalsButton;
-@property (nonatomic,weak) IBOutlet UIButton *plusButton;
+@property (nonatomic,weak) IBOutlet UILabel *display;
 
 @end
 
 @implementation ViewController
+
+int current=0;
+int prev=0;
+int c=10;
+
+- (IBAction)oneButtonPressed:(id)sender {
+    _display.text = [_display.text stringByAppendingString:(@"1")];
+    current=[_display.text intValue];
+    //NSLog(@"%d",current);
+}
+
+- (IBAction)plusButtonPressed:(id)sender {
+    _display.text=@" ";
+    int temp=current+prev;
+    NSLog(@"%d",temp);
+    //_display.text= (@"%d",temp);
+    prev=current;
+    
+}
+
+- (IBAction)equalsButtonPressed:(id)sender {
+    
+    int temp=current+prev;
+    NSLog(@"%d",temp);
+    _display.text = [NSString stringWithFormat: @"%d",temp];
+    //NSLog(@"equals");
+}
+
+- (IBAction)clearButtonPressed:(id)sender {
+    current=0;
+    prev=0;
+    _display.text=@" ";
+    NSLog(@"clear");
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
