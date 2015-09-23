@@ -148,15 +148,17 @@ double global;
 }
 
 - (IBAction)decimalButtonPressed:(id)sender {
-    if(checkClear) {
-        _display.text=@".";
-        current=0;
-        checkClear=false;
-    } else {
-        _display.text = [_display.text stringByAppendingString:(@".")];
-        current=[_display.text doubleValue];
+    if (![_display.text containsString:(@".")]) {
+        if(checkClear) {
+            _display.text=@".";
+            current=0;
+            checkClear=false;
+        } else {
+            _display.text = [_display.text stringByAppendingString:(@".")];
+            current=[_display.text doubleValue];
+        }
+        multY=[_display.text doubleValue];
     }
-    multY=[_display.text doubleValue];
 }
 
 
